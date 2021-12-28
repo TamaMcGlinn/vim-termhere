@@ -37,7 +37,7 @@ endif
 nnoremap <Leader>cf :call termhere#UseRelativeFilenameInTermBelow('')<CR>
 nnoremap <Leader>cF :call termhere#UseAbsoluteFilenameInTermBelow('')<CR>
 
-" if you use [which-key](https://github.com/liuchengxu/vim-which-key)
+" if you use https://github.com/liuchengxu/vim-which-key
 let g:which_key_map['c'] = {'name': '+Terminal',
              \'c': 'Full window',
              \'s': 'Split below',
