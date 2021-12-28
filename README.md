@@ -7,6 +7,8 @@ the terminal's directory and the vim working dir.
 If you are on windows, it also loads 'doskey.cmd' (which you have to write), 
 and starts up Git bash unless you use the 'DOS' functions.
 
+Works well in conjunction with [dirhere](https://github.com/TamaMcGlinn/vim-dirhere).
+
 ## Install
 
 Use your favourite plugin manager.
