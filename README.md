@@ -7,6 +7,14 @@ the terminal's directory and the vim working dir.
 If you are on windows, it also loads 'doskey.cmd' (which you have to write), 
 and starts up Git bash unless you use the 'DOS' functions.
 
+## Install
+
+Use your favourite plugin manager.
+
+```
+Plug 'TamaMcGlinn/vim-termhere'
+```
+
 Example config:
 
 ```
