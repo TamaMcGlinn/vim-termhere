@@ -1,8 +1,8 @@
 # Open Terminal Here
 
 Termhere makes it easier to open a terminal, because it switches straight to insert mode,
-enables the intuitive `<ESC>` to get back out, and adds functionality for swapping out
-the terminal's directory and the vim working dir.
+enables the intuitive `<ESC>` to get back out, and adds functionality for using the filename
+of a different split in the terminal.
 
 If you are on windows, it also loads 'doskey.cmd' (which you have to write), 
 and starts up Git bash unless you use the 'DOS' functions.
