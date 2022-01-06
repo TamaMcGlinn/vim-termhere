@@ -1,6 +1,8 @@
 
 " Enable <ESC> to go back to normal mode
 tnoremap <ESC> <C-\><C-n>
+" Re-enable <ESC>. to repeat last argument
+tnoremap <ESC>. <ESC>.
 
 if has('win32')
   augroup TerminalMappings
