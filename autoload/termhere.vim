@@ -45,17 +45,40 @@ function! termhere#JumpToTerminalBuffer() abort
   throw "Unable to find terminal window in current tab"
 endfunction
 
+function! termhere#JumpToNormalBuffer() abort
+  if &buftype !=# 'terminal'
+    return
+  endif
+  let l:first_window_number = winnr()
+  while v:true
+    execute "wincmd W"
+    if &buftype !=# 'terminal'
+      return
+    endif
+    if winnr() == l:first_window_number
+      break
+    endif
+  endwhile
+  throw "Unable to find non-terminal window in current tab to copy filename from"
+endfunction
+
 function! termhere#UseAbsoluteFilenameInTermBelow(prefix, ...) abort
- let l:postfix = get(a:, 1, '')
- let l:filename = expand('%:p')
- call termhere#JumpToTerminalBuffer()
- call feedkeys('a' . a:prefix . l:filename . l:postfix)
+  if &buftype ==# 'terminal'
+    call termhere#JumpToNormalBuffer()
+  endif
+  let l:postfix = get(a:, 1, '')
+  let l:filename = expand('%:p')
+  call termhere#JumpToTerminalBuffer()
+  call feedkeys('a' . a:prefix . l:filename . l:postfix)
 endfunction
 
 function! termhere#UseRelativeFilenameInTermBelow(prefix, ...) abort
-   let l:postfix = get(a:, 1, '')
-   let l:filename = bufname('%')
-   call termhere#JumpToTerminalBuffer()
-   call feedkeys('a' . a:prefix . l:filename . l:postfix)
+  if &buftype ==# 'terminal'
+    call termhere#JumpToNormalBuffer()
+  endif
+  let l:postfix = get(a:, 1, '')
+  let l:filename = bufname('%')
+  call termhere#JumpToTerminalBuffer()
+  call feedkeys('a' . a:prefix . l:filename . l:postfix)
 endfunction
 
