@@ -46,20 +46,33 @@ function! termhere#JumpToTerminalBuffer() abort
 endfunction
 
 function! termhere#JumpToNormalBuffer() abort
-  if &buftype !=# 'terminal'
+  " nofile_winnr allows us to prefer buffers whose type is not nofile,
+  " (i.e. regular files) but still return them without error if it's the
+  " only nonterminal buffer around
+  let l:nofile_winnr = v:null
+  if &buftype !=# 'nofile' && &buftype !=# 'terminal'
     return
+  endif
+  if &buftype ==# 'nofile'
+    let l:nofile_winnr = winnr()
   endif
   let l:first_window_number = winnr()
   while v:true
     execute "wincmd W"
-    if &buftype !=# 'terminal'
+    if &buftype !=# 'nofile' && &buftype !=# 'terminal'
       return
+    endif
+    if &buftype ==# 'nofile'
+      let l:nofile_winnr = winnr()
     endif
     if winnr() == l:first_window_number
       break
     endif
   endwhile
-  throw "Unable to find non-terminal window in current tab to copy filename from"
+  if l:nofile_winnr is v:null
+    throw "Unable to find non-terminal window in current tab to copy filename from"
+  endif
+  execute l:nofile_winnr .. "wincmd w"
 endfunction
 
 function! termhere#UseAbsoluteFilenameInTermBelow(prefix, ...) abort
