@@ -1,5 +1,6 @@
 function! termhere#OpenTerminal(open_dos_terminal=v:false) abort
   execute ':term'
+  execute ':set filetype=terminal'
   call feedkeys('A')
   if has('win32')
     let l:enter = "\<CR>"
